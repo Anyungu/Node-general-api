@@ -16,11 +16,11 @@ export default {
             const { value, error } = schema.validate(req.body);
 
             if (error && error.details) {
-                return res.status(400).json(error);
+                return res.status(400).json(error.details);
             }
 
             const song = await Song.create(value);
-            return res.json(song);
+            return res.json({message: "Song Record Created Successfully"});
 
         } catch (err) {
             console.error(err);
@@ -76,7 +76,7 @@ export default {
             if (!song) {
                 return res.status(401).json({err: 'Could not find song'})
             }
-            return res.json(song);
+            return res.json({"message": "Song Found and deleted"});
 
         } catch (err) {
         

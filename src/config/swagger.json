@@ -1,0 +1,410 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "version": "2.0",
+    "title": "MUSIC API by Anyungu",
+    "description": "Music API for dummies like me to learn NodeJS",
+    "contact": {
+      "name": "Anyungu C",
+      "email": "anyungucw@gmail.com"
+    },
+    "basePath": "/api",
+    "license": {
+      "name": "Not provided yet"
+    }
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000/",
+      "description": "Local server"
+    },
+    {
+      "url": "https://api_url_testing",
+      "description": "Testing server"
+    },
+    {
+      "url": "https://api_url_production",
+      "description": "Production server"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Songs",
+      "description": "Songs Endpoints"
+    },
+    {
+      "name": "Users",
+      "description": "Users Endpoints"
+    }
+  ],
+  "paths": {
+    "/api/songs": {
+      "get": {
+        "tags": [
+          "Songs"
+        ],
+        "description": "Get all songs..",
+        "operationId": "getSongs",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "default": 1
+            },
+            "required": false
+          },
+          {
+            "name": "perPage",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            },
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Songs Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SongsResponsePageList"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Songs"
+        ],
+        "description": "Create a song...",
+        "operationId": "createSong",
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SongRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Songs Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessMessage"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/songs/{id}": {
+      "get": {
+        "tags": [
+          "Songs"
+        ],
+        "description": "Get one song..",
+        "operationId": "getSongsOne",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "string",
+              "default": "string"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Song Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SongResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Songs"
+        ],
+        "description": "Delete one song..",
+        "operationId": "deleteSongsOne",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "string",
+              "default": "string"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Song Found and deleted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessMessage"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/users/signUp": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "description": "Create a user...",
+        "operationId": "createUser",
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Users Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessMessage"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/users/login": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "description": "Login a user...",
+        "operationId": "loginUser",
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserLoginRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Users Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessMessage"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "rating": {
+        "type": "integer",
+        "description": "Song rating",
+        "example": 2
+      },
+      "title": {
+        "type": "string",
+        "example": "Despacito"
+      },
+      "url": {
+        "type": "string",
+        "example": "The most viewed song in the world"
+      },
+      "_id": {
+        "type": "string",
+        "example": "abbuuag554$55rauk"
+      },
+      "__v": {
+        "type": "string",
+        "example": 6
+      },
+      "email": {
+        "type": "string",
+        "example": "test@gmail.com"
+      },
+      "password": {
+        "type": "string",
+        "example": "*********"
+      },
+      "firstName": {
+        "type": "string",
+        "example": "John"
+      },
+      "lastName": {
+        "type": "string",
+        "example": "Doe"
+      },
+      "UserResponse": {
+        "type": "object",
+        "properties": {
+          "firstName": {
+            "$ref": "#/components/schemas/firstName"
+          },
+          "lastName": {
+            "$ref": "#/components/schemas/lastName"
+          },
+          "email": {
+            "$ref": "#/components/schemas/email"
+          },
+          "password": {
+            "$ref": "#/components/schemas/password"
+          },
+          "_id": {
+            "$ref": "#/components/schemas/_id"
+          },
+          "__v": {
+            "$ref": "#/components/schemas/__v"
+          }
+        }
+      },
+      "UserRequest": {
+        "type": "object",
+        "properties": {
+          "firstName": {
+            "$ref": "#/components/schemas/firstName"
+          },
+          "lastName": {
+            "$ref": "#/components/schemas/lastName"
+          },
+          "email": {
+            "$ref": "#/components/schemas/email"
+          },
+          "password": {
+            "$ref": "#/components/schemas/password"
+          }
+        }
+      },
+      "UserLoginRequest": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "$ref": "#/components/schemas/email"
+          },
+          "password": {
+            "$ref": "#/components/schemas/password"
+          }
+        }
+      },
+      "SongResponse": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "$ref": "#/components/schemas/title"
+          },
+          "url": {
+            "$ref": "#/components/schemas/url"
+          },
+          "rating": {
+            "$ref": "#/components/schemas/rating"
+          },
+          "_id": {
+            "$ref": "#/components/schemas/_id"
+          },
+          "__v": {
+            "$ref": "#/components/schemas/__v"
+          }
+        }
+      },
+      "SongRequest": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "$ref": "#/components/schemas/title"
+          },
+          "url": {
+            "$ref": "#/components/schemas/url"
+          },
+          "rating": {
+            "$ref": "#/components/schemas/rating"
+          }
+        }
+      },
+      "SongsResponsePageList": {
+        "type": "object",
+        "properties": {
+          "docs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SongResponse"
+            }
+          },
+          "total": {
+            "type": "integer",
+            "example": 10
+          },
+          "limit": {
+            "type": "integer",
+            "example": 10
+          },
+          "page": {
+            "type": "integer",
+            "example": 1
+          },
+          "pages": {
+            "type": "integer",
+            "example": 1
+          }
+        }
+      },
+      "SuccessMessage": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "Error": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "internal_code": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

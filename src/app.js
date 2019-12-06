@@ -2,15 +2,25 @@
 import express from 'express';
 import logger from 'morgan';
 import {dbConnect} from './config/db';
-import {restRouter} from './api'
+import {restRouter} from './api';
+// import * as cors from 'cors';
+import passport from 'passport';
+import {configJWTStrategy} from './api/middleware/passport-jwt'
+
+
 
 const app = express();
 const PORT = 3000;
+
+
 
 dbConnect();
 
 app.use(logger('dev'));
 
+
+app.use(passport.initialize())
+configJWTStrategy();
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
